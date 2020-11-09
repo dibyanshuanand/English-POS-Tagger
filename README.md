@@ -19,6 +19,6 @@ The tagger is based on Hidden Markov Model enhanced with Viterbi algorithm. The 
     - Deepro Banerjee
     - Dipanshu Kumar Suman
     - Gitansha Aggarwal
-    - Dibyanshu Anand [dibyanshuanand](https://github.com/dibyanshuanand)
+    - Dibyanshu Anand
 
 This project was completed as an assignment for WSM under the guidance of Professor Rakesh Chandra Balabantaray.
