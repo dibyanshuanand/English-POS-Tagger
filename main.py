@@ -208,7 +208,7 @@ def loadVITERBIParams():
 def main():
     perf_counter()
  
-    train = loadData('Brown_tagged_train')
+    train = loadData('Brown_corpus_tagged')
     words, tags = splitWordTags(train)
     Qvalue = Qcalc(tags)
     saveObject(Qvalue, ParametersFolder + 'q_values.pkl')
