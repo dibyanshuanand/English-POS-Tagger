@@ -52,7 +52,7 @@ def calculateKnown(words):
         for word in sentence:
             wordsAll.append(word)
  
-    words_count = Counter(word)
+    words_count = Counter(wordsAll)
  
     knownWordsAll=[]
     for word,count in words_count.items():
@@ -67,6 +67,7 @@ def replaceRare(sentences, knownWords):
     replacedArray = []
     for sentence in sentences:
         replacedArray.append([word in knownWords and word or RARE for word in sentence])
+    #print(replacedArray)
     return replacedArray
  
 
@@ -78,15 +79,15 @@ def Ecalc(toks, tags):
  
     wordsFlat = []
     for sentence in toks:
-        for word in sentence:
-            wordsFlat.append(word)
+        for tag in sentence:
+            wordsFlat.append(tag)
  
     tagsCounter = Counter(tagsFlat)
     wordTag = zip(wordsFlat, tagsFlat)
-    wordTagCoungter = Counter(wordTag)
+    wordTagCounter = Counter(wordTag)
  
     eValue = {}
-    for k,c in wordTagCoungter.items():
+    for k,c in wordTagCounter.items():
         firstTagCounter = float(tagsCounter[k[1]])
         eValue[k] = log(float(c),2)-log(firstTagCounter,2)
     tagList = set(tagsFlat)
@@ -225,7 +226,7 @@ def main():
     del train
     del wordRare
  
-    dev = loadData('Brown_dev')
+    dev = loadData('input')
     devWords = [] 
     for sentence in dev:
         devWords.append(sentence.split(" ")[:-1])
@@ -233,7 +234,7 @@ def main():
         " ".join(["{0}/{1}".format(*x) for x in \
             tagVITERBI(tokens, tagset, knownWords, Qvalue, Evalue)]) \
         for tokens in devWords)
-    outputTagged(VITERBItagged, OutputFolder + 'Brown_tagged_dev.txt')
+    outputTagged(VITERBItagged, OutputFolder + 'output.txt')
  
  
     print("Elapsed time: " + str(perf_counter()) + ' sec')
