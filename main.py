@@ -70,39 +70,27 @@ def replaceRare(sentences, knownWords):
     return replacedArray
  
 
-# def Ecalc(toks, tags):
-#     tagsFlat = []
-#     for sentence in tags:
-#         for word in sentence:
-#             tagsFlat.append(word)
- 
-#     wordsFlat = []
-#     for sentence in toks:
-#         for word in sentence:
-#             wordsFlat.append(word)
- 
-#     tagsCounter = Counter(tagsFlat)
-#     wordTag = zip(wordsFlat, tagsFlat)
-#     wordTagCoungter = Counter(wordTag)
- 
-#     eValue = {}
-#     for k,c in wordTagCoungter.items():
-#         firstTagCounter = float(tagsCounter[k[1]])
-#         eValue[k] = log(float(c),2)-log(firstTagCounter,2)
-#     tagList = set(tagsFlat)
-#     return eValue, tagList
-
 def Ecalc(toks, tags):
-    tags_flat  = [tag  for sentence in tags for tag  in sentence]
-    words_flat = [word for sentence in toks for word in sentence]
-    tags_c = Counter(tags_flat)
-    word_tag = zip(words_flat, tags_flat)
-    word_tag_c = Counter(word_tag)
-    e_values = {k: log(float(c),2)-log(float(tags_c[k[1]]),2) \
-            for k,c in word_tag_c.items()}
-    taglist = set(tags_flat)
-    return e_values, taglist
+    tagsFlat = []
+    for sentence in tags:
+        for word in sentence:
+            tagsFlat.append(word)
  
+    wordsFlat = []
+    for sentence in toks:
+        for word in sentence:
+            wordsFlat.append(word)
+ 
+    tagsCounter = Counter(tagsFlat)
+    wordTag = zip(wordsFlat, tagsFlat)
+    wordTagCoungter = Counter(wordTag)
+ 
+    eValue = {}
+    for k,c in wordTagCoungter.items():
+        firstTagCounter = float(tagsCounter[k[1]])
+        eValue[k] = log(float(c),2)-log(firstTagCounter,2)
+    tagList = set(tagsFlat)
+    return eValue, tagList
 
 def tagVITERBI(tokens, tagset, knownWords, Q, E):
     tags = tagset.difference({START,STOP})
